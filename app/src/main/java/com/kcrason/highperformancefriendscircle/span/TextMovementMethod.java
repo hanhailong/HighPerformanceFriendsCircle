@@ -21,6 +21,7 @@ public class TextMovementMethod extends LinkMovementMethod {
             mTextClickSpan = getTextSpan(widget, buffer, event);
             if (mTextClickSpan != null) {
                 mTextClickSpan.setPressed(true);
+                // 必须添加，不然不会调用TextClickSpan的updateDrawState方法，即不会更新TextView的背景
                 Selection.setSelection(buffer, buffer.getSpanStart(mTextClickSpan), buffer.getSpanEnd(mTextClickSpan));
             }
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -28,12 +29,14 @@ public class TextMovementMethod extends LinkMovementMethod {
             if (mTextClickSpan != null && touchTextClickSpan != mTextClickSpan) {
                 mTextClickSpan.setPressed(false);
                 mTextClickSpan = null;
+                // 必须添加
                 Selection.removeSelection(buffer);
             }
         } else {
             if (mTextClickSpan != null) {
                 mTextClickSpan.setPressed(false);
                 mTextClickSpan = null;
+                // 必须添加
                 Selection.removeSelection(buffer);
                 /**
                  *  当用户长按span时，不响应相应的点击事件。判断规则为从开始到结束的时间是否大于500ms
@@ -55,6 +58,8 @@ public class TextMovementMethod extends LinkMovementMethod {
      * @return
      */
     private TextClickSpan getTextSpan(TextView widget, Spannable spannable, MotionEvent event) {
+
+        // 下面的代码都是系统源码逻辑，哈哈，还是得看系统源码啊
         int x = (int) event.getX();
         int y = (int) event.getY();
 

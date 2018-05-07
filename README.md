@@ -13,3 +13,5 @@ GIF看着有点卡，可以下载apk自行体验，流畅度和微信几乎无�
 - 最后就是除了要减少onMeasure()和onLayout()的次数之后，我们也需要减少View的创建。减少View的创建我们可以使用一个弱引用的缓存数组和实现View对象的缓存，这里要感谢[razerdp](https://github.com/razerdp)提供的思路。
 
 具体的一些其他逻辑，代码中自行研究吧，后续可能还会继续更新该项目，包括表情的匹配，电话号码的匹配等，看自己时间情况。欢迎大家start！
+
+# TextClickSpan不错，一个TextView搞定所有赞
